@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "410390272143",
+    "firebase_url": "https://cargafacil-3e88f.firebaseio.com",
+    "project_id": "cargafacil-3e88f",
+    "storage_bucket": "cargafacil-3e88f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410390272143:android:25aaa6163aa4cf52",
+        "android_client_info": {
+          "package_name": "com.cargafacilapp.cargafacilapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410390272143-8g4fi7suegg0m64njfb179fapaptr57d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cargafacilapp.cargafacilapp",
+            "certificate_hash": "e6a02bc82c12afd111b93bebbcdaecc063cc2170"
+          }
+        },
+        {
+          "client_id": "410390272143-d1e3ud9pefesc8cj4r84c3nkf0u497ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-ZyNaf8_djzcOJajcfo7Kdpl4ITVzvWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410390272143-d1e3ud9pefesc8cj4r84c3nkf0u497ct.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "410390272143-7afkctil5pd6kl6kvgh53pm87s3omqff.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cargafacil.cargafacilapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

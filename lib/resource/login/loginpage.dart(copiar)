@@ -1,0 +1,126 @@
+import 'package:cargafacilapp/home/homepage.dart';
+import 'package:cargafacilapp/signin_page.dart';
+import 'package:cargafacilapp/utils/cargafacil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+
+
+class LoginPage extends StatefulWidget {
+  final String title;
+  
+  LoginPage({Key key, this.title}) : super(key: key);
+
+  _LoginPageState createState() => _LoginPageState();
+}
+
+
+class _LoginPageState extends State<LoginPage> {
+  
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController =TextEditingController();
+  
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isLogged = false;
+
+  FirebaseUser myUser;
+
+  Future<FirebaseUser> _loginWithFacebook() async {
+    var facebookLogin = new FacebookLogin();
+    var result = await facebookLogin.logInWithReadPermissions(['email','public_profile']);
+
+    debugPrint(result.status.toString());
+    print("---------------------");
+    print(result.status);
+    print("---------------------");
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      print("entro a login");
+      AuthCredential credential =
+      FacebookAuthProvider.getCredential(accessToken: result.accessToken.token);
+      FirebaseUser user = await FirebaseAuth.instance.signInWithCredential(credential);     
+      return user;
+    }else if (result.status == FacebookLoginStatus.error) {
+      print(result.errorMessage);
+    }
+    return null;
+  }
+
+  void _logInFacebook() {
+    _loginWithFacebook().then((response) {
+      if (response != null) {
+        myUser = response;
+        print("login facebook usuario");
+        print(myUser);
+        isLogged = true;
+        setState(() {});
+      }
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login Page'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                icon: Icon(Icons.email)
+              ),
+            ),
+            SizedBox(height: 15.0,),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                icon: Icon(Icons.vpn_key)
+              ),
+            ),
+             SizedBox(height: 15.0,),
+             FlatButton(
+               child: Text('Login'),
+               color: Colors.orangeAccent,
+               textColor: Colors.white,
+               onPressed: (){
+                 print("PRUEBA DE LOGIN");
+                      
+                FirebaseAuth.instance.signInWithEmailAndPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text).then((FirebaseUser user){                      
+                      CagaFacil.redireccionarPagina(context, HomePage());                 
+                    }).catchError((e){
+                      print(e);
+                    });
+              },
+             ), 
+             FlatButton(
+               child: Text('Register'),
+               color: Colors.green,
+               textColor: Colors.white,
+               onPressed: () => null,
+               ),
+               VerticalDivider(),
+               FlatButton(
+               child: Text('Login google'),
+               color: Colors.green,
+               textColor: Colors.white,
+               onPressed: () => CagaFacil.redireccionarPagina(context, SignInPage()),
+               ),
+              FacebookSignInButton(
+                  onPressed: _logInFacebook,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
