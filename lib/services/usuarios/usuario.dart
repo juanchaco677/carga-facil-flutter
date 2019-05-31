@@ -29,8 +29,8 @@ class UsuarioService {
     return await db.collection('usuario').document(usuario.id).get();
   }
 
-  Future <Usuario> getUser(Usuario usuario) async {
-    return await db.collection('usuario').document(usuario.id).get().then((doc) {
+  Future <Usuario> getUser(String id) async {
+    return await db.collection('usuario').document(id).get().then((doc) {
         if (doc.exists)
            return new Usuario(doc.data);
         else
