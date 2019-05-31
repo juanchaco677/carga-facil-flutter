@@ -32,9 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: CargaFacil.detenerIrSplash,
-      child: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -368,8 +366,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-        ),
-      ),
+        ),    
     );
   }
 
