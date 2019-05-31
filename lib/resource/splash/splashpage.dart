@@ -3,6 +3,7 @@ import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:cargafacilapp/services/usuarios/usuario.dart';
 import 'package:cargafacilapp/resource/splash/loginscreen.dart';
 import 'dart:async';
 
@@ -21,9 +22,18 @@ class SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     Auth.getCurrentFirebaseUser().then((user) {
       if (user != null && !Validator.validateString(user.uid)) {
-        CargaFacil.redireccionarPagina(context, HomePage());
+     
+        UsuarioService usuarioService = new UsuarioService();
+        usaurioService.getUser(user.uid).then((usuario) {
+         if (usuario != null ){
+             Auth auth=new Auth(usuario:usuario);
+             print("usaurio logueado es ${auth.usuario.id}");
+             CargaFacil.redireccionarPagina(context, HomePage());
+          } 
+      });      
       } else {
         Timer(Duration(seconds: 1),
             () => CargaFacil.redireccionarPagina(context, LoginScreenPage()));
