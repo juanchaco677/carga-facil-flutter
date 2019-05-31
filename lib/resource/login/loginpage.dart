@@ -1,6 +1,7 @@
 import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/multilenguaje/validacioneslg.dart';
+import 'package:cargafacilapp/resource/home/homepage.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -236,7 +237,22 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             color: Colors.redAccent,
                             onPressed: () async {
-                              if (_formKey.currentState.validate()) {}
+                              if (_formKey.currentState.validate()) {
+                                Auth.signIn(_correoControler.text,
+                                        _contrasenaControler.text)
+                                    .then((id) {
+                                  if (!Validator.validateString(id)) {
+                                    CargaFacil.redireccionarPagina(
+                                        context, HomePage());
+                                  }
+                                }).catchError((signInError) {
+                                  CargaFacil.showAlertDialog(
+                                      context: context,
+                                      titulo: "¡Cuidado!",
+                                      mensaje: Auth.getExceptionText(
+                                          e: signInError, context: context));
+                                });
+                              }
                             },
                             child: new Container(
                               padding: const EdgeInsets.symmetric(

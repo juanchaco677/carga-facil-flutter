@@ -8,6 +8,7 @@ import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:cargafacilapp/services/usuarios/usuario.dart';
 import 'package:cargafacilapp/model/usuario.dart';
+import 'package:flutter/services.dart';
 
 class SignUpPage extends StatefulWidget {
   final UsuarioService usuario = new UsuarioService();
@@ -179,8 +180,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   Divider(
                     height: 24.0,
-                  ),   
-                     new Row(
+                  ),
+                  new Row(
                     children: <Widget>[
                       new Expanded(
                         child: new Padding(
@@ -197,7 +198,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  
                   new Container(
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.only(
@@ -218,7 +218,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         new Expanded(
                           child: TextFormField(
                             controller: _nombreCompletoController,
-                            obscureText: true,
                             textAlign: TextAlign.left,
                             validator: (value) {
                               if (Validator.validateString(value)) {
@@ -238,97 +237,93 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   Divider(
                     height: 24.0,
-                  ),    
-                  new Row(
-                    children: <Widget>[
-                  new Container(
-                    width: MediaQuery.of(context).size.width - 80,
-                    margin: const EdgeInsets.only(
-                        left: 40.0, right: 40.0, top: 10.0),
-                    height: 180.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: ExactAssetImage('assets/images/mountains.jpg'),
-                        fit: BoxFit.cover,
-                      ),
+                  ),
+                  new Row(children: <Widget>[
+                    new Container(
+                      width: MediaQuery.of(context).size.width - 80,
+                      margin: const EdgeInsets.only(
+                          left: 40.0, right: 40.0, top: 10.0),
+                      height: 180.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: ExactAssetImage('assets/images/mountains.jpg'),
+                          fit: BoxFit.cover,
+                        ),
                         boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.black38,
-                          offset: Offset(0.0, 8.0),
-                          blurRadius: 20.0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(7.0) //         <--- border radius here
+                          BoxShadow(
+                            color: Colors.black38,
+                            offset: Offset(0.0, 8.0),
+                            blurRadius: 20.0,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(
+                                7.0) //         <--- border radius here
+                            ),
+                      ),
+                      child: CheckboxListTile(
+                        activeColor: Colors.redAccent,
+                        value: _isCheckedConductor,
+                        onChanged: (bool val) =>
+                            setState(() => _isCheckedConductor = val),
+                        subtitle: !_isCheckedAgente && !_isCheckedConductor
+                            ? Text(
+                                'Campo requerido',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            : null,
+                        title: Text("Conductor",
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ),
-                    child: CheckboxListTile(
-                      activeColor: Colors.redAccent,
-                      value: _isCheckedConductor,
-                      onChanged: (bool val) =>
-                          setState(() => _isCheckedConductor= val),
-                      subtitle:  !_isCheckedAgente && !_isCheckedConductor
-                          ? Text(
-                              'Campo requerido',
-                              style: TextStyle(color: Colors.red),
-                            )
-                          : null,
-                      title: Text("Agente Comercial",
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                 ]),
+                  ]),
                   Divider(
                     height: 24.0,
-                  ),   
-                  new Row(
-                    children: <Widget>[
-                  new Container(
-                    width: MediaQuery.of(context).size.width - 80,
-                    margin: const EdgeInsets.only(
-                        left: 40.0, right: 40.0, top: 10.0),
-                    height: 180.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: ExactAssetImage('assets/images/mountains.jpg'),
-                        fit: BoxFit.cover,
-                        
-                      ),
-                       boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.black38,
-                          offset: Offset(0.0, 8.0),
-                          blurRadius: 20.0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(7.0) //         <--- border radius here
-                      ),
-                    ),
-                    child: CheckboxListTile(
-                      activeColor: Colors.redAccent,
-                      value: _isCheckedAgente,
-                      onChanged: (bool val) =>
-                          setState(() => _isCheckedAgente = val),
-                      subtitle: !_isCheckedAgente && !_isCheckedConductor
-                          ? Text(
-                              'Campo requerido',
-                              style: TextStyle(color: Colors.red),
-                            )
-                          : null,
-                      title: Text("Agente Comercial",
-                          style: TextStyle(color: Colors.white)),
-                    ),
                   ),
-                ]),
-
+                  new Row(children: <Widget>[
+                    new Container(
+                      width: MediaQuery.of(context).size.width - 80,
+                      margin: const EdgeInsets.only(
+                          left: 40.0, right: 40.0, top: 10.0),
+                      height: 180.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: ExactAssetImage('assets/images/mountains.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black38,
+                            offset: Offset(0.0, 8.0),
+                            blurRadius: 20.0,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(
+                                7.0) //         <--- border radius here
+                            ),
+                      ),
+                      child: CheckboxListTile(
+                        activeColor: Colors.redAccent,
+                        value: _isCheckedAgente,
+                        onChanged: (bool val) =>
+                            setState(() => _isCheckedAgente = val),
+                        subtitle: !_isCheckedAgente && !_isCheckedConductor
+                            ? Text(
+                                'Campo requerido',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            : null,
+                        title: Text("Agente Comercial",
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                    ),
+                  ]),
                   Divider(
                     height: 24.0,
-                  ),             
+                  ),
                   new Container(
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.only(
-                        left: 30.0, right: 30.0, top: 10.0,bottom: 50.0),
+                        left: 30.0, right: 30.0, top: 10.0, bottom: 50.0),
                     alignment: Alignment.center,
                     child: new Row(
                       children: <Widget>[
@@ -339,8 +334,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             color: Colors.redAccent,
                             onPressed: () async {
-                              if (_formKey.currentState.validate() && (_isCheckedAgente || _isCheckedConductor)) {
-                                  iconButtonPressed();
+                              if (_formKey.currentState.validate() &&
+                                  (_isCheckedAgente || _isCheckedConductor)) {
+                                iconButtonPressed();
                               }
                             },
                             child: new Container(
@@ -367,7 +363,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                  ),                            
+                  ),
                 ],
               ),
             ),
@@ -378,25 +374,25 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void iconButtonPressed() {
+
     Auth.signUp(_correoControler.value.text, _contrasenaControler.value.text)
         .then((String id) {
-          Usuario usuario = new Usuario(
-            id: id,
-            nombre_completo: _nombreCompletoController.value.text,
-            estado: "T",
-            tipo: "conductor:${_isCheckedConductor},agente:${_isCheckedAgente}",
-            created_at:new DateTime.now().toString(),
-            updated_at:new DateTime.now().toString(),
-          );
-          widget.usuario.checkUserExist(usuario).then((existe){
-            if(!existe){
-              widget.usuario.create(usuario);
-            }else{
-              Auth.usuario = usuario;
-              CargaFacil.redireccionarPagina(context, HomePage());
-            }
-          });               
-    }).catchError((e) =>
-            print('Ocurrio un error al registrar el usuario: ' + e.toString()));
+      Usuario usuario = new Usuario(
+        id: id,
+        nombre_completo: _nombreCompletoController.value.text,
+        estado: "T",
+        tipo: "conductor:${_isCheckedConductor},agente:${_isCheckedAgente}",
+        created_at: new DateTime.now().toString(),
+        updated_at: new DateTime.now().toString(),
+      );
+
+      widget.usuario.create(usuario);
+      CargaFacil.redireccionarPagina(context, HomePage());
+
+    }).catchError((signUpError) {
+      CargaFacil.showAlertDialog(
+          context:context, titulo:"¡Cuidado!",mensaje: Auth.getExceptionText(e:signUpError,context: context));
+    });
+
   }
 }

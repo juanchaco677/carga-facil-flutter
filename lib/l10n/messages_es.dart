@@ -37,9 +37,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ingrese un correo válido"),
         "encontrasenacaracteres": MessageLookupByLibrary.simpleMessage(
             "Ingrese una contraseña mayor a 6 caracteres."),
-        "etnombrecompleto": MessageLookupByLibrary.simpleMessage(
-            "Nombre Completo:"),
-        "btnsiguiente": MessageLookupByLibrary.simpleMessage(
-            "Siguiente"),
+        "etnombrecompleto":
+            MessageLookupByLibrary.simpleMessage("Nombre Completo:"),
+        "btnsiguiente": MessageLookupByLibrary.simpleMessage("Siguiente"),
+        "ERROR_WEAK_PASSWORD":
+            MessageLookupByLibrary.simpleMessage("La contraseña no es segura."),
+        "ERROR_INVALID_EMAIL": MessageLookupByLibrary.simpleMessage(
+            "Dirección de correo electrónico incorrecta."),
+        "ERROR_WRONG_PASSWORD": MessageLookupByLibrary.simpleMessage(
+            "La contraseña es incorrecta."),
+        "ERROR_TOO_MANY_REQUESTS": MessageLookupByLibrary.simpleMessage(
+            "Hubo varios intentos de sesión con este usuario."),
+        "ERROR_USER_DISABLED": MessageLookupByLibrary.simpleMessage(
+            "El usauario ha sido desabilitado."),
+        "ERROR_EMAIL_ALREADY_IN_USE": MessageLookupByLibrary.simpleMessage(
+            "La dirección de correo electrónico esta en uso."),
+        "ERROR_INVALID_CREDENTIAL":
+            MessageLookupByLibrary.simpleMessage("Credenciales incorrectas."),
+        "ERROR_USER_NOT_FOUND": MessageLookupByLibrary.simpleMessage(
+            "No hay ningún usuario registrado con ese correo electrónico."),
+        "ERROR_UNKNOWN": MessageLookupByLibrary.simpleMessage(
+            "Ocurrió un error desconocido."),
       };
 }

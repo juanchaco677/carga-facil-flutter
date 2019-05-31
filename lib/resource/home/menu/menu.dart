@@ -1,6 +1,8 @@
 import 'package:cargafacilapp/resource/home/menu/collapsing_list_tile.dart';
 import 'package:cargafacilapp/resource/home/menu/lista_menu.dart';
+import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/themes/theme.dart';
+import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +58,16 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
               return CollapSingListTile(
                 onTap: () {
                   setState(() {
+                    print(counter);
                     currentIsSelected = counter;
+                    switch (counter) {
+                      case 6:
+                             Auth.signOut().then((retorno){
+                                  CargaFacil.redireccionarPagina(context, SplashPage());
+                          });    
+                          break;
+                      default:
+                    }
                   });
                 },
                 isSelected: currentIsSelected == counter,

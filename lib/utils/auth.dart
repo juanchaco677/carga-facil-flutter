@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:cargafacilapp/model/usuario.dart';
+import 'package:cargafacilapp/multilenguaje/errores.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -8,7 +10,7 @@ enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
 class Auth {
   static Usuario usuario;
-  
+
   static Future<String> signIn(String email, String password) async {
     FirebaseUser user = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
@@ -48,28 +50,48 @@ class Auth {
   static Future<FirebaseUser> getCurrentFirebaseUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     return user;
-  } 
+  }
 
-  static String getExceptionText(Exception e) {
+  static String getExceptionText({Exception e, BuildContext context}) {
     if (e is PlatformException) {
-      switch (e.message) {
-        case 'There is no user record corresponding to this identifier. The user may have been deleted.':
-          return 'User with this e-mail not found.';
+      switch (e.code) {
+        case 'ERROR_WEAK_PASSWORD':
+          return ErroresLG.of(context).errorWeakPassword;
           break;
-        case 'The password is invalid or the user does not have a password.':
-          return 'Invalid password.';
+
+        case 'ERROR_INVALID_EMAIL':
+          return ErroresLG.of(context).errorInvalidEmail;
           break;
-        case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
-          return 'No internet connection.';
+
+        case 'ERROR_WRONG_PASSWORD':
+          return ErroresLG.of(context).errorWrongPassword;
           break;
-        case 'The email address is already in use by another account.':
-          return 'Email address is already taken.';
+
+        case 'ERROR_TOO_MANY_REQUESTS':
+          return ErroresLG.of(context).errorTooManyRequests;
           break;
+
+        case 'ERROR_USER_DISABLED':
+          return ErroresLG.of(context).errorUserDisabled;
+          break;
+
+        case 'ERROR_EMAIL_ALREADY_IN_USE':
+          return ErroresLG.of(context).errorEmailAlreadyInUse;
+          break;
+
+        case 'ERROR_INVALID_CREDENTIAL':
+          return ErroresLG.of(context).errorInvalidCredential;
+          break;
+
+        case 'ERROR_USER_NOT_FOUND':
+          return ErroresLG.of(context).errorUserNotFound;
+          break;
+
         default:
-          return 'Unknown error occured.';
+          return ErroresLG.of(context).errorUnknown;
       }
     } else {
-      return 'Unknown error occured.';
+      return ErroresLG.of(context).errorUnknown;
     }
   }
 }
