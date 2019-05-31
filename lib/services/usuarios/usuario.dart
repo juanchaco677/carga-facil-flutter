@@ -29,6 +29,16 @@ class UsuarioService {
     return await db.collection('usuario').document(usuario.id).get();
   }
 
+  Future <Usuario> getUser(Usuario usuario) async {
+    return await db.collection('usuario').document(usuario.id).get().then((doc) {
+        if (doc.exists)
+           return new Usuario(doc.data);
+        else
+           return = null;
+      });
+  }
+
+
  Future<bool> checkUserExist(Usuario usuario) async {
     bool exists = false;
     try {
