@@ -9,7 +9,19 @@ import 'package:google_sign_in/google_sign_in.dart';
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
 class Auth {
-  static Usuario usuario;
+  
+  Usuario usuario;
+
+  static Auth instance;
+
+  factory Auth ({this.usuario}) {
+    if (instance == null) {
+      instance = new Auth ._internal(usuario:this.usuario);
+    }
+    return instance;
+  }  
+
+  Auth._internal({this.usuario});
 
   static Future<String> signIn(String email, String password) async {
     FirebaseUser user = await FirebaseAuth.instance
