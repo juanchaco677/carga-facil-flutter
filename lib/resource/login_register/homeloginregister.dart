@@ -4,6 +4,7 @@ import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/resource/register/signuppage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeLoginRegisterPage extends StatefulWidget {
   @override
@@ -22,9 +23,8 @@ class _HomeLoginRegisterPageState extends State<HomeLoginRegisterPage>
 
   Widget homeLoginRegisterPage() {
     return WillPopScope(
-      onWillPop: () async {
-        CargaFacil.redireccionarPagina(context, SplashPage());
-        return false;
+      onWillPop: () {
+        SystemNavigator.pop();
       },
       child: Container(
         height: MediaQuery.of(context).size.height,

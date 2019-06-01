@@ -8,6 +8,7 @@ import 'package:cargafacilapp/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/multilenguaje/errores.dart';
@@ -57,9 +58,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-     onWillPop: () async {
-        CargaFacil.redireccionarPagina(context, SplashPage());
-        return false;
+      onWillPop: () {
+        SystemNavigator.pop();
       },
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -251,10 +251,11 @@ class _LoginPageState extends State<LoginPage> {
                                         context, HomePage());
                                   }
                                 }).catchError((signInError) {
-                                 CargaFacil.showAlertDialog(
+                                  CargaFacil.showAlertDialog(
                                       context: context,
                                       titulo: "¡Cuidado!",
-                                      mensaje: Auth.getExceptionText( e: signInError, context: context));
+                                      mensaje: Auth.getExceptionText(
+                                          e: signInError, context: context));
                                 });
                               }
                             },
@@ -375,7 +376,7 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           ])
                         ]),
-                    padding: const EdgeInsets.all(0.0),
+                    padding: const EdgeInsets.all(20.0),
                     alignment: Alignment.center,
                   ),
                 ],

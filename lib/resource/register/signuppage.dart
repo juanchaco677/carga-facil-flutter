@@ -34,9 +34,8 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        CargaFacil.redireccionarPagina(context, SplashPage());
-        return false;
+      onWillPop: () {
+        SystemNavigator.pop();
       },
       child: Scaffold(
         resizeToAvoidBottomPadding: false,

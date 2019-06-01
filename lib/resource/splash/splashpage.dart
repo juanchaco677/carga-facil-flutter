@@ -29,7 +29,6 @@ class SplashPageState extends State<SplashPage> {
         Auth auth = new Auth();
         auth.addUsuario(user.uid).then((valor) {
           if (valor) {
-            print("usuario logueado es ${auth.usuario.id}");
             CargaFacil.redireccionarPagina(context, HomePage());
           }
         });
