@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CargaFacil {
@@ -11,6 +12,8 @@ class CargaFacil {
       );
     }
   }
+
+
 
   static void redireccionarPaginaSinAnterior(
       BuildContext context, Widget page) {
@@ -52,6 +55,34 @@ class CargaFacil {
       context: context,
       builder: (BuildContext context) {
         return alert;
+      },
+    );
+  }
+
+  static showProgresing(
+      {BuildContext context}) {
+   
+    WillPopScope modal = WillPopScope(
+      onWillPop: detenerIrSplash,
+      child:Stack(
+      children: [
+        new Opacity(
+          opacity: 0.3,
+          child: const ModalBarrier(dismissible: false, color: Colors.grey),
+        ),
+        new Center(
+          child: new CircularProgressIndicator(           
+          ),
+        ),
+      ],
+      )
+    );  
+    showDialog(
+      
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return modal;
       },
     );
   }

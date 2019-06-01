@@ -377,6 +377,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void iconButtonPressed() {
+     CargaFacil.showProgresing(context: context);    
     Auth.signUp(_correoControler.value.text, _contrasenaControler.value.text)
         .then((String id) {
       Usuario usuario = new Usuario(
@@ -389,8 +390,12 @@ class _SignUpPageState extends State<SignUpPage> {
       );
 
       widget.usuario.create(usuario);
+      Auth auth = new Auth();
+      auth.usuario=usuario;
+      Navigator.pop(context);
       CargaFacil.redireccionarPagina(context, HomePage());
     }).catchError((signUpError) {
+      Navigator.pop(context);
       CargaFacil.showAlertDialog(
           context: context,
           titulo: "¡Cuidado!",

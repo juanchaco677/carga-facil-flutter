@@ -37,10 +37,12 @@ class SplashPageState extends State<SplashPage> {
             () => CargaFacil.redireccionarPagina(context, LoginScreenPage()));
       }
     });
+   
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,

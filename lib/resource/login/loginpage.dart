@@ -241,16 +241,24 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: new BorderRadius.circular(30.0),
                             ),
                             color: Colors.redAccent,
-                            onPressed: () async {
+                            onPressed: () async {                             
                               if (_formKey.currentState.validate()) {
+                               CargaFacil.showProgresing(context: context);                               
                                 Auth.signIn(_correoControler.text,
                                         _contrasenaControler.text)
                                     .then((id) {
                                   if (!Validator.validateString(id)) {
-                                    CargaFacil.redireccionarPagina(
-                                        context, HomePage());
+                                    Auth auth = new Auth();
+                                    auth.addUsuario(id).then((valor) {
+                                      if (valor) {
+                                        Navigator.pop(context);
+                                        CargaFacil.redireccionarPagina(
+                                            context, HomePage());
+                                      }
+                                    });
                                   }
                                 }).catchError((signInError) {
+                                  Navigator.pop(context);
                                   CargaFacil.showAlertDialog(
                                       context: context,
                                       titulo: "¡Cuidado!",
