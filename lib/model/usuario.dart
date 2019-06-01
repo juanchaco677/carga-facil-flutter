@@ -11,6 +11,8 @@ class Usuario {
   String id;
   
   String nombre_completo;
+
+  String correo;
   
   String estado;
   
@@ -25,6 +27,7 @@ class Usuario {
   Usuario.fromJson({this.json}){
     this.id = json['id'];
     this.nombre_completo = json['nombre_completo'];
+    this.correo = json['correo'];
     this.estado = json['estado'];
     this.tipo = json['tipo'];
     this.foto_perfil = json['foto_perfil'];
@@ -32,9 +35,10 @@ class Usuario {
     this.updated_at = json["updated_at"];
   }
 
-  Usuario({@required this.id, @required this.nombre_completo, @required this.estado, @required this.tipo, this.foto_perfil , @required this.created_at, @required this.updated_at}){
+  Usuario({@required this.id, @required this.nombre_completo,@required this.correo, @required this.estado, @required this.tipo, this.foto_perfil , @required this.created_at, @required this.updated_at}){
 
     json['nombre_completo'] = this.nombre_completo;
+    json['correo'] = this.correo;
     json['estado'] = this.estado;
     json['tipo'] = this.tipo;
     json['foto_perfil'] = this.foto_perfil;

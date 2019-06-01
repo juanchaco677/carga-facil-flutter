@@ -49,9 +49,27 @@ class _LoginPageState extends State<LoginPage> {
       var profile = JSON.jsonDecode(graphResponse.body);
       AuthCredential credential = FacebookAuthProvider.getCredential(
           accessToken: result.accessToken.token);
-      Auth.signInWithFacebok(credential);
+      CargaFacil.showProgresing(context: context);
+      Auth.signInWithFacebok(credential).then((id) {
+        if (!Validator.validateString(id)) {
+          Auth auth = new Auth();
+          auth.addUsuario(id).then((valor) {
+            if (valor) {
+              Navigator.pop(context);
+              CargaFacil.redireccionarPagina(context, HomePage());
+            }
+          });
+        }
+      }).catchError((signInError) {
+        Navigator.pop(context);
+        CargaFacil.showAlertDialog(
+            context: context,
+            titulo: "¡Cuidado!",
+            mensaje: Auth.getExceptionText(e: signInError, context: context));
+      });
     } else if (result.status == FacebookLoginStatus.error) {
-      print(result.errorMessage);
+      CargaFacil.showAlertDialog(
+          context: context, titulo: "¡Cuidado!", mensaje: result.errorMessage);
     }
   }
 
@@ -241,9 +259,9 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: new BorderRadius.circular(30.0),
                             ),
                             color: Colors.redAccent,
-                            onPressed: () async {                             
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
-                               CargaFacil.showProgresing(context: context);                               
+                                CargaFacil.showProgresing(context: context);
                                 Auth.signIn(_correoControler.text,
                                         _contrasenaControler.text)
                                     .then((id) {
@@ -374,7 +392,36 @@ class _LoginPageState extends State<LoginPage> {
                                           width: 60.0,
                                           height: 60.0,
                                           child: InkWell(
-                                            onTap: Auth.signGoogle,
+                                            onTap: () {
+                                              CargaFacil.showProgresing(
+                                                  context: context);
+                                              Auth.signGoogle().then((id) {
+                                                if (!Validator.validateString(
+                                                    id)) {
+                                                  Auth auth = new Auth();
+                                                  auth
+                                                      .addUsuario(id)
+                                                      .then((valor) {
+                                                    if (valor) {
+                                                      Navigator.pop(context);
+                                                      CargaFacil
+                                                          .redireccionarPagina(
+                                                              context,
+                                                              HomePage());
+                                                    }
+                                                  });
+                                                }
+                                              }).catchError((signInError) {
+                                                Navigator.pop(context);
+                                                CargaFacil.showAlertDialog(
+                                                    context: context,
+                                                    titulo: "¡Cuidado!",
+                                                    mensaje:
+                                                        Auth.getExceptionText(
+                                                            e: signInError,
+                                                            context: context));
+                                              });
+                                            },
                                             child: null,
                                           ),
                                         ),

@@ -383,6 +383,7 @@ class _SignUpPageState extends State<SignUpPage> {
       Usuario usuario = new Usuario(
         id: id,
         nombre_completo: _nombreCompletoController.value.text,
+        correo:_correoControler.value.text,
         estado: "T",
         tipo: "conductor:${_isCheckedConductor},agente:${_isCheckedAgente}",
         created_at: new DateTime.now().toString(),

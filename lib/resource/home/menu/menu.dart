@@ -1,5 +1,7 @@
+import 'package:cargafacilapp/resource/home/menu/account_drawable.dart';
 import 'package:cargafacilapp/resource/home/menu/collapsing_list_tile.dart';
 import 'package:cargafacilapp/resource/home/menu/lista_menu.dart';
+import 'package:cargafacilapp/resource/home/pages/ProfilePages.dart';
 import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/themes/theme.dart';
 import 'package:cargafacilapp/utils/auth.dart';
@@ -8,7 +10,7 @@ import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
-  final Auth auth = new Auth();  
+  final Auth auth = new Auth();
   @override
   _MenuState createState() => _MenuState();
 }
@@ -29,12 +31,11 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
         ));
     _widthAnimation =
         Tween<double>(begin: CargaFacil.maxWidth, end: CargaFacil.minWidth)
-            .animate(_animationController); 
+            .animate(_animationController);
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, widget) => getWidget(context, widget),
@@ -48,10 +49,15 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
         width: _widthAnimation.value,
         color: drawerBackgroundColor,
         child: Column(children: <Widget>[
-          CollapSingListTile(
+          AccountDrawable(
             titulo: this.widget.auth.usuario.nombre_completo,
             icon: Icons.person,
             animationController: _animationController,
+            onTap: () {
+              setState(() {
+                CargaFacil.redireccionarPagina(context, ProfilePages());
+              });
+            },
           ),
           Divider(color: Colors.grey, height: 40.0),
           Expanded(
@@ -63,7 +69,6 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
                 return CollapSingListTile(
                   onTap: () {
                     setState(() {
-                      print(counter);
                       currentIsSelected = counter;
                       switch (counter) {
                         case 6:

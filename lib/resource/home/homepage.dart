@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: drawerBackgroundColor,
-          title: Text("home"),
+          title: Text("Logo"),
           automaticallyImplyLeading: false,
         ),
         body: Stack(
-            children: <Widget>[Container(color: Colors.purpleAccent), Menu()]),
+            children: <Widget>[Container(color: Colors.white70), Menu()]),
       ),
     );
   }
