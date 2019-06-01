@@ -13,6 +13,7 @@ class SplashPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
+    print("constanza mamona");
     return SplashPageState();
   }
 }
@@ -25,15 +26,13 @@ class SplashPageState extends State<SplashPage> {
 
     Auth.getCurrentFirebaseUser().then((user) {
       if (user != null && !Validator.validateString(user.uid)) {
-     
-        UsuarioService usuarioService = new UsuarioService();
-        usaurioService.getUser(user.uid).then((usuario) {
-         if (usuario != null ){
-             Auth auth=new Auth(usuario:usuario);
-             print("usaurio logueado es ${auth.usuario.id}");
-             CargaFacil.redireccionarPagina(context, HomePage());
-          } 
-      });      
+        Auth auth = new Auth();
+        auth.addUsuario(user.uid).then((valor) {
+          if (valor) {
+            print("usuario logueado es ${auth.usuario.id}");
+            CargaFacil.redireccionarPagina(context, HomePage());
+          }
+        });
       } else {
         Timer(Duration(seconds: 1),
             () => CargaFacil.redireccionarPagina(context, LoginScreenPage()));

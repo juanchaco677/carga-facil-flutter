@@ -4,9 +4,11 @@ import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/themes/theme.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
+import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
+  final Auth auth = new Auth();  
   @override
   _MenuState createState() => _MenuState();
 }
@@ -27,11 +29,12 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
         ));
     _widthAnimation =
         Tween<double>(begin: CargaFacil.maxWidth, end: CargaFacil.minWidth)
-            .animate(_animationController);
+            .animate(_animationController); 
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, widget) => getWidget(context, widget),
@@ -46,36 +49,41 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
         color: drawerBackgroundColor,
         child: Column(children: <Widget>[
           CollapSingListTile(
-            titulo: "juan camilo rodriguez diaz",
+            titulo: this.widget.auth.usuario.nombre_completo,
             icon: Icons.person,
             animationController: _animationController,
           ),
           Divider(color: Colors.grey, height: 40.0),
           Expanded(
-            child: ListView.separated(separatorBuilder: (context, counter) {
-              return Divider(color: Colors.grey, height: 12.0);
-            }, itemBuilder: (context, counter) {
-              return CollapSingListTile(
-                onTap: () {
-                  setState(() {
-                    print(counter);
-                    currentIsSelected = counter;
-                    switch (counter) {
-                      case 6:
-                             Auth.signOut().then((retorno){
-                                  CargaFacil.redireccionarPagina(context, SplashPage());
-                          });    
+            child: ListView.separated(
+              separatorBuilder: (context, counter) {
+                return Divider(color: Colors.grey, height: 12.0);
+              },
+              itemBuilder: (context, counter) {
+                return CollapSingListTile(
+                  onTap: () {
+                    setState(() {
+                      print(counter);
+                      currentIsSelected = counter;
+                      switch (counter) {
+                        case 6:
+                          Auth.signOut().then((retorno) {
+                            CargaFacil.redireccionarPagina(
+                                context, SplashPage());
+                          });
                           break;
-                      default:
-                    }
-                  });
-                },
-                isSelected: currentIsSelected == counter,
-                titulo: itemMenu[counter].titulo,
-                icon: itemMenu[counter].icon,
-                animationController: _animationController,
-              );
-            }, itemCount: itemMenu.length,),
+                        default:
+                      }
+                    });
+                  },
+                  isSelected: currentIsSelected == counter,
+                  titulo: itemMenu[counter].titulo,
+                  icon: itemMenu[counter].icon,
+                  animationController: _animationController,
+                );
+              },
+              itemCount: itemMenu.length,
+            ),
           ),
           InkWell(
             onTap: () {

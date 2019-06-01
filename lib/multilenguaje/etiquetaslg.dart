@@ -22,7 +22,7 @@ class EtiquetaLG {
   String get titulo {
     return Intl.message(
       'Carga Facil',
-      name: 'tituloAPp',
+      name: 'tituloAPP',
       desc: 'título de la aplicacion',
     );
   }

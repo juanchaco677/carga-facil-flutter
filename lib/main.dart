@@ -1,7 +1,7 @@
 import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
+import 'package:cargafacilapp/multilenguaje/errores.dart';
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/multilenguaje/validacioneslg.dart';
-import 'package:cargafacilapp/resource/home/homepage.dart';
 import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
         BotonLGDelegate(),
         EtiquetaLGDelegate(),
         ValidacionLGDelegate(),
+        ErroresLGDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],

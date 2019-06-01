@@ -14,7 +14,7 @@ class CargaFacil {
     }
   }
 
-  static Future<bool> detenerIrSplash() {
+ static Future<bool> detenerIrSplash() {
     return false as Future<bool>;
   }
 

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:cargafacilapp/model/usuario.dart';
 import 'package:cargafacilapp/multilenguaje/errores.dart';
+import 'package:cargafacilapp/services/usuarios/usuario.dart';
+import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,19 +11,36 @@ import 'package:google_sign_in/google_sign_in.dart';
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
 class Auth {
-  
   Usuario usuario;
 
   static Auth instance;
 
-  factory Auth ({this.usuario}) {
+  factory Auth() {
     if (instance == null) {
-      instance = new Auth ._internal(usuario:this.usuario);
+      instance = new Auth._internal();
     }
     return instance;
-  }  
+  }
 
-  Auth._internal({this.usuario});
+  Auth._internal();
+ 
+ Future<bool> addUsuario(String id) async {
+      UsuarioService usuarioService = new UsuarioService();
+    bool exists = false;
+    try {
+      await usuarioService.getUser(id).then((usuario) {
+        if (usuario != null){
+          this.usuario = usuario;
+          exists = true;
+        }else{
+          exists = false;
+        }
+      });
+      return exists;
+    } catch (e) {
+      return false;
+    }
+  }
 
   static Future<String> signIn(String email, String password) async {
     FirebaseUser user = await FirebaseAuth.instance
@@ -64,6 +83,7 @@ class Auth {
     return user;
   }
 
+  
   static String getExceptionText({Exception e, BuildContext context}) {
     if (e is PlatformException) {
       switch (e.code) {

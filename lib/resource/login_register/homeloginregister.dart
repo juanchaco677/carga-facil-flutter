@@ -1,5 +1,6 @@
 import 'package:cargafacilapp/resource/login/loginpage.dart';
 import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
+import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/resource/register/signuppage.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,10 @@ class _HomeLoginRegisterPageState extends State<HomeLoginRegisterPage>
 
   Widget homeLoginRegisterPage() {
     return WillPopScope(
-      onWillPop: CargaFacil.detenerIrSplash,
+      onWillPop: () async {
+        CargaFacil.redireccionarPagina(context, SplashPage());
+        return false;
+      },
       child: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
@@ -68,10 +72,10 @@ class _HomeLoginRegisterPageState extends State<HomeLoginRegisterPage>
                   ],
                 ),
               ),
-               new Container(
+              new Container(
                 width: MediaQuery.of(context).size.width,
-                 margin:
-                 const EdgeInsets.only(left: 30.0, right: 30.0, top: 150.0),
+                margin:
+                    const EdgeInsets.only(left: 30.0, right: 30.0, top: 150.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -106,7 +110,7 @@ class _HomeLoginRegisterPageState extends State<HomeLoginRegisterPage>
                   ],
                 ),
               ),
-            new Container(
+              new Container(
                 width: MediaQuery.of(context).size.width,
                 margin:
                     const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
@@ -176,9 +180,12 @@ class _HomeLoginRegisterPageState extends State<HomeLoginRegisterPage>
         child: PageView(
           controller: _controller,
           physics: new AlwaysScrollableScrollPhysics(),
-          children: <Widget>[LoginPage(), homeLoginRegisterPage(), SignUpPage()],
+          children: <Widget>[
+            LoginPage(),
+            homeLoginRegisterPage(),
+            SignUpPage()
+          ],
           scrollDirection: Axis.horizontal,
         ));
   }
-
 }

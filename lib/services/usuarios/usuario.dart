@@ -31,10 +31,12 @@ class UsuarioService {
 
   Future <Usuario> getUser(String id) async {
     return await db.collection('usuario').document(id).get().then((doc) {
-        if (doc.exists)
-           return new Usuario(doc.data);
-        else
-           return = null;
+        if (doc.exists){
+          print("existe usuarios");
+           return new Usuario.fromJson(json:doc.data);
+        }else{
+           return null;
+        }
       });
   }
 

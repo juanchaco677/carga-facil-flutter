@@ -2,6 +2,7 @@ import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/multilenguaje/validacioneslg.dart';
 import 'package:cargafacilapp/resource/home/homepage.dart';
+import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
@@ -32,7 +33,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        CargaFacil.redireccionarPagina(context, SplashPage());
+        return false;
+      },
+      child: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -366,12 +372,12 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-        ),    
+        ),
+      ),
     );
   }
 
   void iconButtonPressed() {
-
     Auth.signUp(_correoControler.value.text, _contrasenaControler.value.text)
         .then((String id) {
       Usuario usuario = new Usuario(
@@ -385,11 +391,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
       widget.usuario.create(usuario);
       CargaFacil.redireccionarPagina(context, HomePage());
-
     }).catchError((signUpError) {
       CargaFacil.showAlertDialog(
-          context:context, titulo:"¡Cuidado!",mensaje: Auth.getExceptionText(e:signUpError,context: context));
+          context: context,
+          titulo: "¡Cuidado!",
+          mensaje: Auth.getExceptionText(e: signUpError, context: context));
     });
-
   }
 }

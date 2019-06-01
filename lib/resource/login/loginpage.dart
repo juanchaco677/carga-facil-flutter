@@ -2,6 +2,7 @@ import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/multilenguaje/validacioneslg.dart';
 import 'package:cargafacilapp/resource/home/homepage.dart';
+import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:cargafacilapp/utils/auth.dart';
+import 'package:cargafacilapp/multilenguaje/errores.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
 
@@ -54,7 +56,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+     onWillPop: () async {
+        CargaFacil.redireccionarPagina(context, SplashPage());
+        return false;
+      },
+      child: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -244,11 +251,10 @@ class _LoginPageState extends State<LoginPage> {
                                         context, HomePage());
                                   }
                                 }).catchError((signInError) {
-                                  CargaFacil.showAlertDialog(
+                                 CargaFacil.showAlertDialog(
                                       context: context,
                                       titulo: "¡Cuidado!",
-                                      mensaje: Auth.getExceptionText(
-                                          e: signInError, context: context));
+                                      mensaje: Auth.getExceptionText( e: signInError, context: context));
                                 });
                               }
                             },
@@ -376,7 +382,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-        ),   
+        ),
+      ),
     );
   }
 }
