@@ -1,3 +1,4 @@
+import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,6 @@ class CargaFacil {
       );
     }
   }
-
-
 
   static void redireccionarPaginaSinAnterior(
       BuildContext context, Widget page) {
@@ -59,26 +58,38 @@ class CargaFacil {
     );
   }
 
-  static showProgresing(
-      {BuildContext context}) {
-   
+  static showProgresing({BuildContext context}) {
     WillPopScope modal = WillPopScope(
-      onWillPop: detenerIrSplash,
-      child:Stack(
-      children: [
-        new Opacity(
-          opacity: 0.3,
-          child: const ModalBarrier(dismissible: false, color: Colors.grey),
-        ),
-        new Center(
-          child: new CircularProgressIndicator(           
-          ),
-        ),
-      ],
-      )
-    );  
+        onWillPop: detenerIrSplash,
+        child: Stack(
+          children: [
+            new Opacity(
+              opacity: 0.3,
+              child: const ModalBarrier(dismissible: false, color: Colors.grey),
+            ),
+            new Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(EtiquetaLG.of(context).etcargando,
+                      style: TextStyle(
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 15.0,
+                      )),
+                  ),
+                  
+                ],
+              ),
+            ),
+          ],
+        ));
     showDialog(
-      
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {

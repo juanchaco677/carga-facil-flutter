@@ -1,3 +1,4 @@
+import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/resource/login/loginpage.dart';
 import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
 import 'package:cargafacilapp/resource/splash/splashpage.dart';
@@ -56,14 +57,7 @@ class _HomeLoginRegisterPageState extends State<HomeLoginRegisterPage>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Carga",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    Text(
-                      "Facil",
+                      EtiquetaLG.of(context).titulo,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,

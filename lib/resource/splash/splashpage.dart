@@ -1,3 +1,4 @@
+import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/resource/home/homepage.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
@@ -12,8 +13,7 @@ class SplashPage extends StatefulWidget {
   SplashPage({Key key, this.title}) : super(key: key) {}
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-    print("constanza mamona");
+    // TODO: implement createState  
     return SplashPageState();
   }
 }
@@ -37,12 +37,10 @@ class SplashPageState extends State<SplashPage> {
             () => CargaFacil.redireccionarPagina(context, LoginScreenPage()));
       }
     });
-   
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
@@ -70,12 +68,11 @@ class SplashPageState extends State<SplashPage> {
                     Center(child: FlutterLogo(size: 400)),
                     CircularProgressIndicator(),
                     Text(
-                      "Carga Facil",
+                      EtiquetaLG.of(context).titulo,
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

@@ -19,8 +19,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
-        "tituloAPP": MessageLookupByLibrary.simpleMessage("Carga Facil"),
+        "TITULO_APP": MessageLookupByLibrary.simpleMessage("cGaF"),
         "etcorreo": MessageLookupByLibrary.simpleMessage("Correo:"),
+        "ET_CARGANDO": MessageLookupByLibrary.simpleMessage("Cargando..."),
         "etcontrasena": MessageLookupByLibrary.simpleMessage("Contraseña:"),
         "etolvidocontrasena":
             MessageLookupByLibrary.simpleMessage("¿Olvidaste Tu Contraseña?"),
@@ -32,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "btnfacebook": MessageLookupByLibrary.simpleMessage("facebook"),
         "btngoogle": MessageLookupByLibrary.simpleMessage("google"),
         "envacia":
-            MessageLookupByLibrary.simpleMessage("Por favor ingrese un texto"),
+            MessageLookupByLibrary.simpleMessage("El campo de texto es obligatorio."),
         "encorronovalido":
             MessageLookupByLibrary.simpleMessage("Ingrese un correo válido"),
         "encontrasenacaracteres": MessageLookupByLibrary.simpleMessage(

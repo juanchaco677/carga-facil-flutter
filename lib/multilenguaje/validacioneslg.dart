@@ -21,7 +21,7 @@ class ValidacionLG {
 
   String get entradavacia {
     return Intl.message(
-      'Por favor ingrese un texto',
+      'El campo de texto es obligatorio.',
       name: 'envacia',
       desc: 'entrada cadena de texto vacio',
     );

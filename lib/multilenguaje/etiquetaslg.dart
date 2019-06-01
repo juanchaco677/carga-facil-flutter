@@ -21,8 +21,8 @@ class EtiquetaLG {
 
   String get titulo {
     return Intl.message(
-      'Carga Facil',
-      name: 'tituloAPP',
+      'cGaF',
+      name: 'TITULO_APP',
       desc: 'título de la aplicacion',
     );
   }
@@ -64,6 +64,14 @@ class EtiquetaLG {
       'Nombre Completo:',
       name: 'etnombrecompleto',
       desc: 'etiqueta nombre completo',
+    );
+  }
+
+    String get etcargando {
+    return Intl.message(
+      'Cargando...',
+      name: 'ET_CARGANDO',
+      desc: 'etiqueta cargando',
     );
   }
 }
