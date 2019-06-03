@@ -1,5 +1,7 @@
 import 'dart:collection';
+
 import 'package:cargafacilapp/model/viaje.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Carga {
 
@@ -23,9 +25,9 @@ class Carga {
 
   String id_usuario_destinatario;
 
-  DateTime created_at;
+  Timestamp created_at;
   
-  DateTime updated_at;
+  Timestamp updated_at;
 
   Carga({@required this.id,@required this.tipo,@required this.cantidad,@required this.descripcion,@required this.id_empresa_remitente,@required this.id_usuario_remitente,@required this.id_empresa_destinatario,@required this.id_usuario_destinatario,@required this.created_at,@required this.updated_at}){
 

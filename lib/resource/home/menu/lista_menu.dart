@@ -6,12 +6,23 @@ class ItemMenu {
   ItemMenu({this.titulo, this.icon});
 }
 
-List<ItemMenu> itemMenu = [
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
-  ItemMenu(titulo: "OPCION UNO", icon: Icons.insert_chart),
+List<ItemMenu> itemMenuConductor = [
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "CONDUCTOR UNO", icon: Icons.insert_chart),
+];
+
+
+List<ItemMenu> itemMenuAgente = [
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
+  ItemMenu(titulo: "AGENTE UNO", icon: Icons.insert_chart),
 ];

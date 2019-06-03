@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Vehiculo {
 
@@ -14,9 +15,9 @@ class Vehiculo {
 
   String id_marca_vehiculo;
 
-  DateTime created_at;
+  Timestamp created_at;
   
-  DateTime updated_at;
+  Timestamp updated_at;
 
   Vehiculo({@required this.id,@required this.placa,@required this.modelo,@required this.id_conductor,@required this.id_marca_vehiculo,@required this.created_at,@required this.updated_at}){
     

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -76,14 +78,13 @@ class CargaFacil {
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(EtiquetaLG.of(context).etcargando,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 15.0,
-                      )),
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 15.0,
+                        )),
                   ),
-                  
                 ],
               ),
             ),
@@ -96,5 +97,10 @@ class CargaFacil {
         return modal;
       },
     );
+  }
+
+  static Map parseJson(String jsonString) {
+    Map decoded = jsonDecode(jsonString);
+    return decoded;
   }
 }

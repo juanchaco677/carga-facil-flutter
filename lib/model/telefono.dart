@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Telefono {
 
@@ -15,9 +16,9 @@ class Telefono {
 
   String id_usuario;
 
-  DateTime created_at;
+  Timestamp created_at;
   
-  DateTime updated_at;
+  Timestamp updated_at;
 
   Telefono({@required this.id,@required this.numero,@required this.indicativo,@required this.tipo,@required this.id_usuario,@required this.created_at,@required this.updated_at}){
     _json["numero"]=this.numero;

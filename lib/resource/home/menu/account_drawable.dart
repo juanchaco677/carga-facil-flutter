@@ -1,3 +1,4 @@
+import 'package:cargafacilapp/resource/home/pages/ProfilePages.dart';
 import 'package:cargafacilapp/themes/theme.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
@@ -15,6 +16,7 @@ class AccountDrawable extends StatefulWidget {
   final Function onTap;
 
   final bool isSelected;
+
   AccountDrawable({
     @required this.titulo,
     @required this.icon,
@@ -49,17 +51,28 @@ class _AccountDrawableState extends State<AccountDrawable> {
           ? UserAccountsDrawerHeader(
               accountName: Text(widget.auth.usuario.nombre_completo),
               accountEmail: Text(widget.auth.usuario.correo),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.redAccent,
-                child: Text("C"),
+              currentAccountPicture: InkWell(
+                child: CircleAvatar(
+                  child: Text(widget.auth.usuario.sesion),
+                  backgroundColor: Colors.redAccent,
+                ),
+                onTap: () =>
+                    CargaFacil.redireccionarPagina(context, ProfilePages()),
               ),
               otherAccountsPictures: <Widget>[
-                CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  child: Text("A"),
-                ),
-              ],
-            )
+                  widget.auth.usuario.tipo["agente"] == "true" &&
+                          widget.auth.usuario.tipo["conductor"] == "true"
+                      ? InkWell(
+                          child: CircleAvatar(
+                            child: Text(
+                                widget.auth.usuario.sesion == "A" ? "C" : "A"),
+                            backgroundColor: Colors.redAccent,
+                          ),
+                          onTap: () => CargaFacil.redireccionarPagina(
+                              context, ProfilePages()),
+                        )
+                      : Container()
+                ])
           : Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(16.0)),

@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:cargafacilapp/model/departamento.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Pais {
 
@@ -11,9 +12,9 @@ class Pais {
   
   String nombre;
 
-  DateTime created_at;
+  Timestamp created_at;
   
-  DateTime updated_at;
+  Timestamp updated_at;
 
   Pais({@required this.id,@required this.nombre,@required this.created_at,@required this.updated_at}){
     _json["nombre"] = this.nombre;

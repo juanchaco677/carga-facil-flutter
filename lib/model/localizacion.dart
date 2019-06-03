@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Localizacion {
 
@@ -16,9 +17,9 @@ class Localizacion {
 
   String id_empresa;
 
-  DateTime created_at;
-
-  DateTime updated_at;
+  Timestamp created_at;
+  
+  Timestamp updated_at;
 
   Localizacion({@required this.id,@required this.direccion,@required this.lalitud,@required this.longitud,@required this.id_ciudad,@required this.id_empresa,@required this.created_at,@required this.updated_at}){
     _json["direccion"] = this.direccion;

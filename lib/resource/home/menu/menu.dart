@@ -54,9 +54,9 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
             icon: Icons.person,
             animationController: _animationController,
             onTap: () {
-              setState(() {
-                CargaFacil.redireccionarPagina(context, ProfilePages());
-              });
+              // setState(() {
+              //   CargaFacil.redireccionarPagina(context, ProfilePages());
+              // });
             },
           ),
           Divider(color: Colors.grey, height: 40.0),
@@ -66,28 +66,53 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
                 return Divider(color: Colors.grey, height: 12.0);
               },
               itemBuilder: (context, counter) {
-                return CollapSingListTile(
-                  onTap: () {
-                    setState(() {
-                      currentIsSelected = counter;
-                      switch (counter) {
-                        case 6:
-                          Auth.signOut().then((retorno) {
-                            CargaFacil.redireccionarPagina(
-                                context, SplashPage());
-                          });
-                          break;
-                        default:
-                      }
-                    });
-                  },
-                  isSelected: currentIsSelected == counter,
-                  titulo: itemMenu[counter].titulo,
-                  icon: itemMenu[counter].icon,
-                  animationController: _animationController,
-                );
+                if (widget.auth.usuario.sesion == 'A') {
+                  return CollapSingListTile(
+                    onTap: () {
+                      setState(() {
+                        currentIsSelected = counter;
+                        switch (counter) {
+                          case 6:
+                            Auth.signOut().then((retorno) {
+                              CargaFacil.redireccionarPagina(
+                                  context, SplashPage());
+                            });
+                            break;
+                          default:
+                        }
+                      });
+                    },
+                    isSelected: currentIsSelected == counter,
+                    titulo: itemMenuAgente[counter].titulo,
+                    icon: itemMenuAgente[counter].icon,
+                    animationController: _animationController,
+                  );
+                } else {
+                  return CollapSingListTile(
+                    onTap: () {
+                      setState(() {
+                        currentIsSelected = counter;
+                        switch (counter) {
+                          case 6:
+                            Auth.signOut().then((retorno) {
+                              CargaFacil.redireccionarPagina(
+                                  context, SplashPage());
+                            });
+                            break;
+                          default:
+                        }
+                      });
+                    },
+                    isSelected: currentIsSelected == counter,
+                    titulo: itemMenuConductor[counter].titulo,
+                    icon: itemMenuConductor[counter].icon,
+                    animationController: _animationController,
+                  );
+                }
               },
-              itemCount: itemMenu.length,
+              itemCount: widget.auth.usuario.sesion == 'A'
+                  ? itemMenuAgente.length
+                  : itemMenuConductor.length,
             ),
           ),
           InkWell(

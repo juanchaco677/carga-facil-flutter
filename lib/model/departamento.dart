@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:cargafacilapp/model/ciudad.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Departamento {
 
@@ -13,9 +14,9 @@ class Departamento {
 
   String id_pais;
 
-  DateTime created_at;
+  Timestamp created_at;
   
-  DateTime updated_at;
+  Timestamp updated_at;
 
   Departamento({@required this.id,@required this.nombre,@required this.id_pais,@required this.created_at,@required this.updated_at}){
     _json["nombre"]=this.nombre;

@@ -1,9 +1,8 @@
+import 'package:cargafacilapp/resource/home/menu/menu.dart';
 import 'package:cargafacilapp/themes/theme.dart';
 import 'package:cargafacilapp/utils/auth.dart';
-import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/material.dart';
-import 'package:cargafacilapp/resource/home/menu/menu.dart';
 
 class HomePage extends StatefulWidget {
   final Auth auth = new Auth();

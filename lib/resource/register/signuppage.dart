@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cargafacilapp/multilenguaje/botoneslg.dart';
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/multilenguaje/validacioneslg.dart';
@@ -6,6 +8,7 @@ import 'package:cargafacilapp/resource/splash/splashpage.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cargafacilapp/services/usuarios/usuario.dart';
 import 'package:cargafacilapp/model/usuario.dart';
@@ -380,14 +383,21 @@ class _SignUpPageState extends State<SignUpPage> {
      CargaFacil.showProgresing(context: context);    
     Auth.signUp(_correoControler.value.text, _contrasenaControler.value.text)
         .then((String id) {
+      Map <String,String> tipo=new HashMap();
+      tipo.addAll({
+        "agente":_isCheckedAgente.toString(),
+        "conductor":_isCheckedConductor.toString()
+      });
+      
       Usuario usuario = new Usuario(
         id: id,
         nombre_completo: _nombreCompletoController.value.text,
         correo:_correoControler.value.text,
+        sesion: _isCheckedAgente && _isCheckedConductor ? 'A' : _isCheckedAgente && !_isCheckedConductor ? 'A' : !_isCheckedAgente && _isCheckedConductor ? 'C' :'A',
         estado: "T",
-        tipo: "conductor:${_isCheckedConductor},agente:${_isCheckedAgente}",
-        created_at: new DateTime.now().toString(),
-        updated_at: new DateTime.now().toString(),
+        tipo: tipo,
+        created_at: new Timestamp.now(),
+        updated_at: new Timestamp.now(),
       );
 
       widget.usuario.create(usuario);
@@ -395,6 +405,7 @@ class _SignUpPageState extends State<SignUpPage> {
       auth.usuario=usuario;
       Navigator.pop(context);
       CargaFacil.redireccionarPagina(context, HomePage());
+      
     }).catchError((signUpError) {
       Navigator.pop(context);
       CargaFacil.showAlertDialog(
