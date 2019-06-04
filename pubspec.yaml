@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   cloud_firestore: ^0.9.0
   http: ^0.12.0+2
+  avatar_glow: ^0.2.0
 
 dev_dependencies:
   flutter_test:
