@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class Usuario {
   
-  Map json=new HashMap<String,String>(); 
+  Map json=Map(); 
   
   Set <Vehiculo> _vehiculo=new HashSet<Vehiculo>();
 
@@ -19,7 +19,7 @@ class Usuario {
 
   String sesion;
   
-  Map tipo;
+  Map tipo =new Map(); 
 
   String foto_perfil;
   
@@ -33,10 +33,10 @@ class Usuario {
     this.correo = json['correo'];
     this.sesion = json['sesion'];
     this.estado = json['estado'];
-    this.tipo = json['tipo'];
+    this.tipo =  json['tipo'];
     this.foto_perfil = json['foto_perfil'];
-    this.created_at = json["created_at"];
-    this.updated_at = json["updated_at"];
+    this.created_at = json["created_at"] as Timestamp ;
+    this.updated_at = json["updated_at"] as Timestamp ;
   }
 
   Usuario({@required this.id, @required this.nombre_completo,@required this.correo,@required this.sesion, @required this.estado, @required this.tipo, this.foto_perfil , @required this.created_at, @required this.updated_at}){

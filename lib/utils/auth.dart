@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:cargafacilapp/model/usuario.dart';
 import 'package:cargafacilapp/multilenguaje/errores.dart';
 import 'package:cargafacilapp/services/usuarios/usuario.dart';
-import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,9 +34,11 @@ class Auth {
         }else{
           exists = false;
         }
-      });
-      return exists;
+     });
+      return exists;    
     } catch (e) {
+      print(e);
+      print("error autenticando con zepelin ${exists}");
       return false;
     }
   }

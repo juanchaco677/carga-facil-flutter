@@ -1,12 +1,12 @@
+import 'dart:async';
+
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
 import 'package:cargafacilapp/resource/home/homepage.dart';
+import 'package:cargafacilapp/resource/splash/loginscreen.dart';
 import 'package:cargafacilapp/utils/auth.dart';
 import 'package:cargafacilapp/utils/cargafacil.dart';
 import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/material.dart';
-import 'package:cargafacilapp/services/usuarios/usuario.dart';
-import 'package:cargafacilapp/resource/splash/loginscreen.dart';
-import 'dart:async';
 
 class SplashPage extends StatefulWidget {
   final String title;
@@ -28,8 +28,11 @@ class SplashPageState extends State<SplashPage> {
       if (user != null && !Validator.validateString(user.uid)) {
         Auth auth = new Auth();
         auth.addUsuario(user.uid).then((valor) {
+          print("usuario existe si o no: ${valor}");
           if (valor) {
             CargaFacil.redireccionarPagina(context, HomePage());
+          }else{
+            CargaFacil.redireccionarPagina(context, LoginScreenPage());
           }
         });
       } else {

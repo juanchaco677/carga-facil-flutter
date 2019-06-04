@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
       if (user != null && !Validator.validateString(user.uid)) {
         auth.addUsuario(user.uid).then((valor) {
           if (valor) {
-            print("usuario logueado es ${auth.usuario.id}");
+            print("USUARIO HOME PAGE ${auth.usuario.id}");
           }
         });
       }

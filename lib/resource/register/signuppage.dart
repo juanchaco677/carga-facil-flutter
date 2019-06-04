@@ -380,32 +380,33 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void iconButtonPressed() {
-     CargaFacil.showProgresing(context: context);    
+    CargaFacil.showProgresing(context: context);
     Auth.signUp(_correoControler.value.text, _contrasenaControler.value.text)
         .then((String id) {
-      Map <String,String> tipo=new HashMap();
-      tipo.addAll({
-        "agente":_isCheckedAgente.toString(),
-        "conductor":_isCheckedConductor.toString()
-      });
-      
+
       Usuario usuario = new Usuario(
         id: id,
         nombre_completo: _nombreCompletoController.value.text,
-        correo:_correoControler.value.text,
-        sesion: _isCheckedAgente && _isCheckedConductor ? 'A' : _isCheckedAgente && !_isCheckedConductor ? 'A' : !_isCheckedAgente && _isCheckedConductor ? 'C' :'A',
+        correo: _correoControler.value.text,
+        sesion: _isCheckedAgente && _isCheckedConductor
+            ? "A"
+            : _isCheckedAgente && !_isCheckedConductor
+                ? "A"
+                : !_isCheckedAgente && _isCheckedConductor ? "C" : "A",
         estado: "T",
-        tipo: tipo,
-        created_at: new Timestamp.now(),
-        updated_at: new Timestamp.now(),
+        tipo: {
+          "agente": _isCheckedAgente.toString(),
+          "conductor": _isCheckedConductor.toString()
+        },
+        created_at: Timestamp.now(),
+        updated_at: Timestamp.now(),
       );
 
       widget.usuario.create(usuario);
       Auth auth = new Auth();
-      auth.usuario=usuario;
+      auth.usuario = usuario;
       Navigator.pop(context);
       CargaFacil.redireccionarPagina(context, HomePage());
-      
     }).catchError((signUpError) {
       Navigator.pop(context);
       CargaFacil.showAlertDialog(
