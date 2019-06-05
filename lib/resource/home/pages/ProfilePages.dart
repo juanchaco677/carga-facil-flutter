@@ -1,4 +1,5 @@
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePages extends StatefulWidget {
@@ -24,22 +25,57 @@ class _ProfilePagesState extends State<ProfilePages>
 
   @override
   Widget build(BuildContext context) {
-    return AvatarGlow(
-    glowColor: Colors.blue,
-    endRadius: 90.0,
-    duration: Duration(milliseconds: 2000),
-    repeat: true,
-    showTwoGlows: true,
-    repeatPauseDuration: Duration(milliseconds: 100),
-    child: Material(
-      elevation: 8.0,
-      shape: CircleBorder(),
-      child: CircleAvatar(
-        backgroundColor:Colors.grey[100] ,
-        child: Image.asset('assets/images/flutter.png',height: 60,),
-        radius: 40.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile"),
       ),
-    ),
-  );
+      body: Column(
+        children: <Widget>[
+          new Container(
+            color: Colors.redAccent,
+            child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  AvatarGlow(
+                    glowColor: Colors.blue,
+                    endRadius: 100.0,
+                    duration: Duration(milliseconds: 2000),
+                    repeat: true,
+                    showTwoGlows: true,
+                    repeatPauseDuration: Duration(milliseconds: 100),
+                    child: new Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProfileAvatar(
+                          'https://avatars0.githubusercontent.com/u/8264639?s=460&v=4',
+                          radius: 60,
+                          backgroundColor: Colors.transparent,
+                          borderWidth: 10,
+                          borderColor: Colors.brown,
+                          elevation: 5.0,
+                          cacheImage: true,
+                          onTap: () {
+                            print('adil');
+                          },
+                          showInitialTextAbovePicture: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                ]),
+            padding: const EdgeInsets.all(0.0),
+            alignment: Alignment.center,
+          ),
+          Container(
+            child: Text("hola mundo"),
+          )
+        ],
+      ),
+    );
   }
 }
