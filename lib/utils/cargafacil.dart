@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:cargafacilapp/multilenguaje/etiquetaslg.dart';
+import 'package:cargafacilapp/multilenguaje/validacioneslg.dart';
+import 'package:cargafacilapp/utils/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -95,6 +97,107 @@ class CargaFacil {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return modal;
+      },
+    );
+  }
+
+  static modalInputEdit(
+      {BuildContext context,
+      TextEditingController controller,
+      Function onTap,
+      GlobalKey<FormState> formKey,
+      String nombreCampo,
+      String nombreBoton}) {
+    Scaffold body = Scaffold(
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: Colors.transparent,
+      body:
+          Column(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+        Container(
+          height: 240,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16)),
+          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                ),
+                new Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    new Expanded(
+                      child: Form(
+                        key: formKey,
+                        child: TextFormField(
+                          controller: controller,
+                          textAlign: TextAlign.left,
+                          validator: (value) {
+                            if (Validator.validateString(value)) {
+                              return "cadena vacias";
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: nombreCampo,
+                            hintStyle: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  height: 24.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                ),
+                FlatButton(
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0),
+                  ),
+                  color: Colors.redAccent,
+                  onPressed: onTap,
+                  child: new Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 15.0,
+                      horizontal: 15.0,
+                    ),
+                    child: Text(
+                      nombreBoton,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ]),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            height: MediaQuery.of(context).size.height - 270,
+            color: Colors.transparent,
+            padding: const EdgeInsets.all(0.0),
+            alignment: Alignment.center,
+          ),
+        )
+      ]),
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return body;
       },
     );
   }
